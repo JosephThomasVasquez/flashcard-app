@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { createDeck, updateDeck } from "../../utils/api/index";
 
-const DeckForm = ({ processDeck }) => {
+const DeckForm = ({ processDeck, addDeck }) => {
   const history = useHistory();
 
   //   set initial form data object
@@ -26,16 +26,17 @@ const DeckForm = ({ processDeck }) => {
 
     if (processDeck === "create-deck") {
       const response = await createDeck(deckFormData);
+      addDeck(response);
       setDeckFormData({ ...initialFormData });
       history.push(`/decks/${response.id}`);
-      console.log("Creating Deck..", deckFormData);
+      console.log("Created Deck", deckFormData);
     }
 
     if (processDeck === "edit-deck") {
-      const response = await createDeck(deckFormData);
+      const response = await updateDeck(deckFormData);
       setDeckFormData({ ...initialFormData });
       history.push(`/decks/${response.id}`);
-      console.log("Creating Deck..", deckFormData);
+      console.log("Updated Deck", deckFormData);
     }
   };
 

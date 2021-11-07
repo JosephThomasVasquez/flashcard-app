@@ -32,6 +32,11 @@ function Layout() {
     };
   }, []);
 
+  const addDeck = (deck) => {
+    deck.cards = [];
+    setDecks([...decks, deck]);
+  };
+
   return (
     <>
       <Header />
@@ -44,7 +49,7 @@ function Layout() {
           </Route>
 
           <Route path="/decks/new">
-            <CreateDeck />
+            <CreateDeck addDeck={addDeck} />
           </Route>
 
           <Route exact path="/decks/:deckId">

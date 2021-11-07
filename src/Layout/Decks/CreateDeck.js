@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import DeckForm from "./DeckForm";
 
-const CreateDeck = () => {
+const CreateDeck = ({ addDeck }) => {
   return (
     <div>
       <div>
@@ -18,7 +18,7 @@ const CreateDeck = () => {
         </nav>
       </div>
       <h2>Create Deck</h2>
-      <DeckForm processDeck={"create-deck"} />
+      <DeckForm processDeck={"create-deck"} addDeck={addDeck} />
     </div>
   );
 };

@@ -27,7 +27,6 @@ const Study = () => {
         currentCard: currentCard.currentCard + 1,
         flipped: !currentCard.flipped,
       });
-      console.log("Restart currentCard", currentCard);
     }
   };
 
@@ -50,7 +49,7 @@ const Study = () => {
     };
 
     getDeck();
-    console.log("Restart currentCard", currentCard.currentCard);
+
     return () => {
       controller.abort();
     };
