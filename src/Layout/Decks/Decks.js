@@ -2,9 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Deck from "./Deck";
 
-const Decks = ({ decks }) => {
+const Decks = ({ decks, handleDeleteDeck }) => {
   const deckList = decks.map((deck, index) => (
-    <Deck key={`deckId-${deck.id}`} deck={deck} decks={decks} />
+    <Deck
+      key={`deckId-${deck.id}`}
+      deck={deck}
+      decks={decks}
+      handleDeleteDeck={handleDeleteDeck}
+    />
   ));
 
   return (

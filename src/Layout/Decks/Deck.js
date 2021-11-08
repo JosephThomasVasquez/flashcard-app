@@ -2,16 +2,10 @@ import React from "react";
 import { Link, useHistory, useRouteMatch } from "react-router-dom";
 import { deleteDeck } from "../../utils/api/index";
 
-const Deck = ({ deck }) => {
+const Deck = ({ deck, handleDeleteDeck }) => {
   console.log(deck);
 
   const history = useHistory();
-
-  const handleDeleteDeck = async () => {
-    window.confirm(`Delete the deck "${deck.name}"`);
-    await deleteDeck(deck.id);
-    history.push("/");
-  };
 
   return (
     <div className="card">
@@ -29,7 +23,7 @@ const Deck = ({ deck }) => {
         </Link>
         <button
           className="btn btn-danger float-right"
-          onClick={handleDeleteDeck}
+          onClick={() => handleDeleteDeck(deck)}
         >
           Delete
         </button>
