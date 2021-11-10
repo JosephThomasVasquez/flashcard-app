@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { createDeck, updateDeck } from "../../utils/api/index";
 
-const DeckForm = ({ processDeck, addDeck }) => {
+const DeckForm = ({ editDeckData, processDeck, addDeck }) => {
   const history = useHistory();
 
   //   set initial form data object
@@ -12,7 +12,9 @@ const DeckForm = ({ processDeck, addDeck }) => {
     id: "",
   };
 
-  const [deckFormData, setDeckFormData] = useState({ ...initialFormData });
+  const [deckFormData, setDeckFormData] = useState(
+    processDeck === "edit-deck" ? { ...editDeckData } : { ...initialFormData }
+  );
 
   // update state with deck form data
   const handleChange = ({ target }) => {

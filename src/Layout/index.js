@@ -1,17 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { listDecks, deleteDeck } from "../utils/api/index";
+import { listDecks, deleteDeck, deleteCard } from "../utils/api/index";
 import Header from "./Header";
 import Decks from "./Decks/Decks";
 import Study from "./study/Study";
 import DeckView from "./Decks/DeckView";
 import CreateDeck from "./Decks/CreateDeck";
 import EditDeck from "./Decks/EditDeck";
+import AddCard from "./Cards/AddCard";
+import EditCard from "./Cards/EditCard";
 import NotFound from "./NotFound";
-import { Link, Route, Switch, useHistory } from "react-router-dom";
+import {
+  Link,
+  Route,
+  Switch,
+  useHistory,
+  useRouteMatch,
+} from "react-router-dom";
 
 function Layout() {
   const history = useHistory();
   const [decks, setDecks] = useState([]);
+
+  const controller = new AbortController();
+  const { signal } = controller;
 
   const getDecks = async (signal) => {
     try {
@@ -24,8 +35,6 @@ function Layout() {
 
   useEffect(() => {
     // fetch decks using utility function listDecks()
-    const controller = new AbortController();
-    const { signal } = controller;
 
     getDecks(signal);
     return () => {
@@ -45,12 +54,16 @@ function Layout() {
     setDecks([...decks, deck]);
   };
 
+  const handleDeleteCard = async (cardId) => {
+    window.confirm("Delete the card?");
+    await deleteCard(cardId, signal);
+    getDecks(signal);
+  };
+
   return (
     <>
       <Header />
       <div className="container">
-        {/* TODO: Implement the screen starting here */}
-
         <Switch>
           <Route exact path="/">
             <Decks decks={decks} handleDeleteDeck={handleDeleteDeck} />
@@ -61,7 +74,10 @@ function Layout() {
           </Route>
 
           <Route exact path="/decks/:deckId">
-            <DeckView />
+            <DeckView
+              handleDeleteDeck={handleDeleteDeck}
+              handleDeleteCard={handleDeleteCard}
+            />
           </Route>
 
           <Route path="/decks/:deckId/study">
@@ -70,6 +86,14 @@ function Layout() {
 
           <Route path="/decks/:deckId/edit">
             <EditDeck />
+          </Route>
+
+          <Route path="/decks/:deckId/cards/new">
+            <AddCard />
+          </Route>
+
+          <Route path="/decks/:deckId/cards/:cardId/edit">
+            <EditCard />
           </Route>
 
           <Route>

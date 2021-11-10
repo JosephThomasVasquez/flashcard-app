@@ -3,14 +3,12 @@ import { Link, useHistory, useParams, useRouteMatch } from "react-router-dom";
 import { readDeck, deleteDeck } from "../../utils/api/index";
 import CardList from "../Cards/CardList";
 
-const DeckView = () => {
+const DeckView = ({ handleDeleteDeck, handleDeleteCard }) => {
   const { deckId } = useParams();
   const { url } = useRouteMatch();
   const history = useHistory();
 
   const [deck, setDeck] = useState(null);
-
-  console.log("url", url);
 
   useEffect(() => {
     // fetch decks using utility function listDecks()
@@ -26,18 +24,12 @@ const DeckView = () => {
       }
     };
 
-    getDeck();
+    getDeck(signal);
 
     return () => {
       controller.abort();
     };
   }, [deckId]);
-
-  const handleDeleteDeck = async () => {
-    window.confirm(`Delete the deck "${deck.name}"`);
-    await deleteDeck(deck.id);
-    history.push("/");
-  };
 
   return (
     <div>
@@ -52,25 +44,43 @@ const DeckView = () => {
         </ol>
       </nav>
       {deck && (
-        <div className="card">
-          <div className="card-body">
-            <h4 className="card-title">
-              {deck.name}{" "}
-              <div className="float-right small">{deck.cards.length} cards</div>
-            </h4>
-            <p className="card-text">{deck.description}</p>
-            <Link to={`${url}/edit`}>
-              <button className="btn btn-secondary mr-2">Edit</button>
-            </Link>
-            <Link to={`/decks/${deck.id}/study`} className="btn btn-primary">
-              Study
-            </Link>
-            <button
-              className="btn btn-danger float-right"
-              onClick={handleDeleteDeck}
-            >
-              Delete
-            </button>
+        <div>
+          <div className="card">
+            <div className="card-body">
+              <h4 className="card-title">
+                {deck.name}{" "}
+                <div className="float-right small">
+                  {deck.cards.length} cards
+                </div>
+              </h4>
+              <p className="card-text">{deck.description}</p>
+
+              <Link to={`${url}/edit`}>
+                <button className="btn btn-secondary mr-2">Edit</button>
+              </Link>
+
+              <Link
+                to={`/decks/${deck.id}/study`}
+                className="btn btn-primary mr-2"
+              >
+                Study
+              </Link>
+
+              <Link to={`/decks/${deck.id}/cards/new`}>
+                <button className="btn btn-primary">Add Cards</button>
+              </Link>
+
+              <button
+                className="btn btn-danger float-right"
+                onClick={() => handleDeleteDeck(deck)}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+          <div>
+            <h2>Cards</h2>
+            <CardList cards={deck.cards} handleDeleteCard={handleDeleteCard} />
           </div>
         </div>
       )}
