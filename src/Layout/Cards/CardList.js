@@ -3,7 +3,6 @@ import { Link, useRouteMatch } from "react-router-dom";
 
 const CardList = ({ cards, handleDeleteCard }) => {
   const { url } = useRouteMatch();
-  const [cardList, setCardList] = useState([]);
 
   console.log(url);
 

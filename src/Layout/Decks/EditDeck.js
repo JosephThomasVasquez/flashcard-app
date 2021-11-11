@@ -1,30 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { Link, useParams, useHistory } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import DeckForm from "./DeckForm";
-import { readDeck } from "../../utils/api/index";
 
-const EditDeck = () => {
-  const history = useHistory();
+const EditDeck = ({ deck, getDeck }) => {
   const { deckId } = useParams();
-  console.log("history:", history);
-
-  const [deck, setDeck] = useState(null);
 
   useEffect(() => {
     // fetch decks using utility function listDecks()
     const controller = new AbortController();
     const { signal } = controller;
 
-    const getDeck = async () => {
-      try {
-        const response = await readDeck(deckId, signal);
-        setDeck(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getDeck(signal);
+    getDeck(deckId, signal);
 
     return () => {
       controller.abort();

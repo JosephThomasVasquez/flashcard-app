@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import { readDeck } from "../../utils/api/index";
 import Card from "../Cards/Card";
+import NotEnoughCards from "../Cards/NotEnoughCards";
 
 const Study = () => {
   // use params for deckId
@@ -55,35 +56,44 @@ const Study = () => {
     };
   }, [deckId]);
 
+  const notEnoughCards = <NotEnoughCards totalCards={currentCard.total} />;
+
   return (
-    <div>
+    deck && (
       <div>
-        <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <Link to={"/"}>Home</Link>
-            </li>
-            <li className="breadcrumb-item" aria-current="page">
-              {deck && <Link to={`/decks/${deck.id}`}>{deck.name}</Link>}
-            </li>
-            <li className="breadcrumb-item active" aria-current="page">
-              Study
-            </li>
-          </ol>
-        </nav>
-      </div>
-      {deck && (
+        <div>
+          <nav aria-label="breadcrumb">
+            <ol className="breadcrumb">
+              <li className="breadcrumb-item">
+                <Link to={"/"}>Home</Link>
+              </li>
+              <li className="breadcrumb-item" aria-current="page">
+                <Link to={`/decks/${deck.id}`}>{deck.name}</Link>
+              </li>
+              <li className="breadcrumb-item active" aria-current="page">
+                Study
+              </li>
+            </ol>
+          </nav>
+        </div>
+        (
         <>
           <h2>Study: {deck.name}</h2>
-          <Card
-            card={deck.cards[currentCard.currentCard]}
-            currentCard={currentCard}
-            setCurrentCard={setCurrentCard}
-            nextCard={nextCard}
-          />
+          {deck.cards.length === 0 ? (
+            notEnoughCards
+          ) : deck.cards.length < 3 ? (
+            notEnoughCards
+          ) : (
+            <Card
+              card={deck.cards[currentCard.currentCard]}
+              currentCard={currentCard}
+              setCurrentCard={setCurrentCard}
+              nextCard={nextCard}
+            />
+          )}
         </>
-      )}
-    </div>
+      </div>
+    )
   );
 };
 

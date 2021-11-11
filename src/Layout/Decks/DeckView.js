@@ -1,30 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Link, useHistory, useParams, useRouteMatch } from "react-router-dom";
-import { readDeck, deleteDeck } from "../../utils/api/index";
+import React, { useEffect } from "react";
+import { Link, useParams, useRouteMatch } from "react-router-dom";
 import CardList from "../Cards/CardList";
 
-const DeckView = ({ handleDeleteDeck, handleDeleteCard }) => {
+const DeckView = ({ deck, getDeck, handleDeleteDeck, handleDeleteCard }) => {
   const { deckId } = useParams();
   const { url } = useRouteMatch();
-  const history = useHistory();
-
-  const [deck, setDeck] = useState(null);
 
   useEffect(() => {
-    // fetch decks using utility function listDecks()
+    // fetch decks using utility function getDeck()
     const controller = new AbortController();
     const { signal } = controller;
 
-    const getDeck = async () => {
-      try {
-        const response = await readDeck(deckId, signal);
-        setDeck(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getDeck(signal);
+    getDeck(deckId, signal);
 
     return () => {
       controller.abort();

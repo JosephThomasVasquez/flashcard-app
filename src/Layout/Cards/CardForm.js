@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState } from "react";
 import { updateCard, createCard } from "../../utils/api/index";
 
 const CardForm = ({ deck, cardData, processCard }) => {
-  const history = useHistory();
-
   console.log("Deckd", deck);
   //   set initial form data object
   const initialFormData = {
@@ -21,30 +18,22 @@ const CardForm = ({ deck, cardData, processCard }) => {
   // update state with deck form data
   const handleChange = ({ target }) => {
     setCardFormData({ ...cardFormData, [target.name]: target.value });
-    console.log("cardFormData:", cardFormData);
   };
 
   //   handle submit deck form data
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(e);
     const controller = new AbortController();
     const { signal } = controller;
 
     if (processCard === "add-card") {
       await createCard(deck.id, cardFormData, signal);
-      //   setCardFormData(response);
       setCardFormData({ ...initialFormData });
-      //   history.push(`/cards/${response.id}`);
-      console.log("Created card", cardFormData);
     }
 
     if (processCard === "edit-card") {
       await updateCard(cardFormData, signal);
-      //   setCardFormData(response);
       setCardFormData({ ...initialFormData });
-      //   history.push(`/cards/${response.id}`);
-      console.log("Created card", cardFormData);
     }
   };
 

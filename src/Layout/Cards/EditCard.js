@@ -1,36 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams, useRouteMatch } from "react-router-dom";
-import { readDeck, readCard } from "../../utils/api/index";
+import { Link, useParams } from "react-router-dom";
+import { readCard } from "../../utils/api/index";
 import CardForm from "./CardForm";
 
-const EditCard = () => {
+const EditCard = ({ deck, getDeck }) => {
   const { deckId, cardId } = useParams();
-
-  const [deck, setDeck] = useState(null);
   const [cardData, setCardData] = useState(null);
 
-  // fetch decks using utility function listDecks()
-  const controller = new AbortController();
-  const { signal } = controller;
-
   useEffect(() => {
-    const getDeck = async (signal) => {
-      try {
-        const response = await readDeck(deckId, signal);
-        setDeck(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    const controller = new AbortController();
+    const { signal } = controller;
 
-    getDeck(signal);
+    getDeck(deckId, signal);
 
     return () => {
       controller.abort();
     };
-  }, [deckId]);
+  }, [deckId, cardData]);
 
   useEffect(() => {
+    const controller = new AbortController();
+    const { signal } = controller;
+
     const getCard = async (signal) => {
       try {
         const response = await readCard(cardId, signal);

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { createDeck, updateDeck } from "../../utils/api/index";
 
 const DeckForm = ({ editDeckData, processDeck, addDeck }) => {
@@ -19,7 +19,6 @@ const DeckForm = ({ editDeckData, processDeck, addDeck }) => {
   // update state with deck form data
   const handleChange = ({ target }) => {
     setDeckFormData({ ...deckFormData, [target.name]: target.value });
-    console.log("deckFormData:", deckFormData);
   };
 
   //   handle submit deck form data
@@ -31,14 +30,12 @@ const DeckForm = ({ editDeckData, processDeck, addDeck }) => {
       addDeck(response);
       setDeckFormData({ ...initialFormData });
       history.push(`/decks/${response.id}`);
-      console.log("Created Deck", deckFormData);
     }
 
     if (processDeck === "edit-deck") {
       const response = await updateDeck(deckFormData);
       setDeckFormData({ ...initialFormData });
       history.push(`/decks/${response.id}`);
-      console.log("Updated Deck", deckFormData);
     }
   };
 

@@ -1,10 +1,6 @@
 import React from "react";
-import NotEnoughCards from "./NotEnoughCards";
 
 const Card = ({ card, currentCard, setCurrentCard, nextCard }) => {
-  //   return null if currentCard does not exist
-  if (!card) return null;
-
   //   handle card flip from card.front to card.back
   const handleFlipCard = () => {
     !currentCard.flipped
@@ -33,17 +29,7 @@ const Card = ({ card, currentCard, setCurrentCard, nextCard }) => {
     </div>
   );
 
-  const notEnoughCards = <NotEnoughCards totalCards={currentCard.total} />;
-
-  return (
-    <div>
-      {currentCard.total === 0
-        ? notEnoughCards
-        : currentCard.total < 3
-        ? notEnoughCards
-        : cardDetails}
-    </div>
-  );
+  return <div>{card && cardDetails}</div>;
 };
 
 export default Card;

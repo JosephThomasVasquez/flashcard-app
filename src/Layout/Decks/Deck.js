@@ -1,12 +1,7 @@
 import React from "react";
-import { Link, useHistory, useRouteMatch } from "react-router-dom";
-import { deleteDeck } from "../../utils/api/index";
+import { Link } from "react-router-dom";
 
 const Deck = ({ deck, handleDeleteDeck }) => {
-  console.log(deck);
-
-  const history = useHistory();
-
   return (
     deck && (
       <div className="card">
