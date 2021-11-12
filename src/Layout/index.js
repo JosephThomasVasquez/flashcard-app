@@ -24,6 +24,7 @@ function Layout() {
   const controller = new AbortController();
   const { signal } = controller;
 
+  // getDecks() function that uses the listDecks() utility function to fetch decks
   const getDecks = async (signal) => {
     try {
       // fetch decks using utility function listDecks()
@@ -32,15 +33,18 @@ function Layout() {
     } catch (error) {
       console.log(error);
     }
-  };
 
-  useEffect(() => {
-    getDecks(signal);
     return () => {
       controller.abort();
     };
+  };
+
+  // useFeect() hook running getDecks function
+  useEffect(() => {
+    getDecks(signal);
   }, []);
 
+  // getDeck() function that uses the readDeck() utility function to fetch deck via deckId from useParams() in the route component
   const getDeck = async (deckId, signal) => {
     try {
       const response = await readDeck(deckId, signal);
@@ -48,13 +52,19 @@ function Layout() {
     } catch (error) {
       console.log(error);
     }
+
+    return () => {
+      controller.abort();
+    };
   };
 
+  // addDeck function to add deck to decks state
   const addDeck = (deck) => {
     deck.cards = [];
     setDecks([...decks, deck]);
   };
 
+  // handle deleting deck and uses the deleteDeck() utiolity function
   const handleDeleteDeck = async (deck, signal) => {
     window.confirm(`Delete the deck "${deck.name}"`);
     await deleteDeck(deck.id);
@@ -62,16 +72,18 @@ function Layout() {
     history.push("/");
   };
 
+  // handle deleting card and uses the deleteCard() utiolity function
   const handleDeleteCard = async (cardId) => {
     window.confirm("Delete the card?");
     await deleteCard(cardId, signal);
-    getDecks(signal);
+    getDeck(deck.id, signal);
   };
 
   return (
     <>
       <Header />
       <div className="container">
+        {/* Switch and Routes for each path and component passing only needed state and functions */}
         <Switch>
           <Route exact path="/">
             <Decks decks={decks} handleDeleteDeck={handleDeleteDeck} />

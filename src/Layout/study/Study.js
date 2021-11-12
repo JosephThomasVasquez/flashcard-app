@@ -9,6 +9,7 @@ const Study = () => {
   const { deckId } = useParams();
   const history = useHistory();
 
+  // created a helper state "currentCard, setCurrentCard" to object for handling cardFlip, total cards, and current card
   const initialCard = { currentCard: 0, total: 0, flipped: false };
 
   const [deck, setDeck] = useState(null);

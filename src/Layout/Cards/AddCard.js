@@ -5,12 +5,11 @@ import CardForm from "./CardForm";
 const AddCard = ({ deck, getDeck }) => {
   const { deckId } = useParams();
 
+  // using the useEffect() hook passing deckId
   useEffect(() => {
-    // fetch decks using utility function listDecks()
     const controller = new AbortController();
-    const { signal } = controller;
 
-    getDeck(deckId, signal);
+    getDeck(deckId);
 
     return () => {
       controller.abort();
@@ -35,6 +34,7 @@ const AddCard = ({ deck, getDeck }) => {
         </nav>
       </div>
       <h2>Add Card</h2>
+      {/* If there is a deck then render CardForm and pass the deck and how to process the card */}
       {deck && <CardForm deck={deck} processCard={"add-card"} />}
     </div>
   );

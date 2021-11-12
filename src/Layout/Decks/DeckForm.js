@@ -16,7 +16,7 @@ const DeckForm = ({ editDeckData, processDeck, addDeck }) => {
     processDeck === "edit-deck" ? { ...editDeckData } : { ...initialFormData }
   );
 
-  // update state with deck form data
+  // update deckFormData state with deck form input values
   const handleChange = ({ target }) => {
     setDeckFormData({ ...deckFormData, [target.name]: target.value });
   };
@@ -25,6 +25,7 @@ const DeckForm = ({ editDeckData, processDeck, addDeck }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // use createDeck() utility function to create a new deck with form data
     if (processDeck === "create-deck") {
       const response = await createDeck(deckFormData);
       addDeck(response);
@@ -32,6 +33,7 @@ const DeckForm = ({ editDeckData, processDeck, addDeck }) => {
       history.push(`/decks/${response.id}`);
     }
 
+    // use updateDeck() utility function to edit an existing deck with form data
     if (processDeck === "edit-deck") {
       const response = await updateDeck(deckFormData);
       setDeckFormData({ ...initialFormData });

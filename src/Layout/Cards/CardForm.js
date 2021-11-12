@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { updateCard, createCard } from "../../utils/api/index";
 
 const CardForm = ({ deck, cardData, processCard }) => {
-  console.log("Deckd", deck);
+  const history = useHistory();
+  const { deckId } = useParams();
+
   //   set initial form data object
   const initialFormData = {
     id: "",
@@ -11,6 +14,7 @@ const CardForm = ({ deck, cardData, processCard }) => {
     back: "",
   };
 
+  // sets initial state if there is deckdata otherwise set initial form data
   const [cardFormData, setCardFormData] = useState(
     processCard === "edit-card" ? { ...cardData } : { ...initialFormData }
   );
@@ -26,14 +30,18 @@ const CardForm = ({ deck, cardData, processCard }) => {
     const controller = new AbortController();
     const { signal } = controller;
 
+    // uses createCard() utility function and resets initial form data
     if (processCard === "add-card") {
       await createCard(deck.id, cardFormData, signal);
       setCardFormData({ ...initialFormData });
+      history.push(`/decks/${deckId}`);
     }
 
+    // uses updateCard() utility function and resets initial form data
     if (processCard === "edit-card") {
       await updateCard(cardFormData, signal);
       setCardFormData({ ...initialFormData });
+      history.push(`/decks/${deckId}`);
     }
   };
 
@@ -71,11 +79,11 @@ const CardForm = ({ deck, cardData, processCard }) => {
             ></textarea>
           </div>
           <div>
-            <button type="button" className="btn btn-secondary mr-2 my-2">
-              Done
+            <button type="submit" className="btn btn-secondary mr-2 my-2">
+              Cancel
             </button>
             <button type="submit" className="btn btn-primary my-2">
-              Save
+              Submit
             </button>
           </div>
         </form>

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Deck = ({ deck, handleDeleteDeck }) => {
+  // if deck exists render Deck with deck object data
   return (
     deck && (
       <div className="card">

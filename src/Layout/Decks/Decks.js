@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Deck from "./Deck";
 
 const Decks = ({ decks, handleDeleteDeck }) => {
+  // create a Deck component and pass deck data as props for each deck
+
   const deckList = decks.map((deck, index) => (
     <Deck
       key={`deckId-${deck.id}`}

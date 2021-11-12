@@ -1,21 +1,15 @@
 import React, { useEffect } from "react";
-import { Link, useParams, useRouteMatch } from "react-router-dom";
+import { Link, useParams, useHistory, useRouteMatch } from "react-router-dom";
 import CardList from "../Cards/CardList";
 
 const DeckView = ({ deck, getDeck, handleDeleteDeck, handleDeleteCard }) => {
   const { deckId } = useParams();
   const { url } = useRouteMatch();
+  const history = useHistory();
 
   useEffect(() => {
     // fetch decks using utility function getDeck()
-    const controller = new AbortController();
-    const { signal } = controller;
-
-    getDeck(deckId, signal);
-
-    return () => {
-      controller.abort();
-    };
+    getDeck(deckId);
   }, [deckId]);
 
   return (
@@ -67,7 +61,12 @@ const DeckView = ({ deck, getDeck, handleDeleteDeck, handleDeleteCard }) => {
           </div>
           <div>
             <h2>Cards</h2>
-            <CardList cards={deck.cards} handleDeleteCard={handleDeleteCard} />
+            {/* render CardList component which is a list of cards passing card array and the handleDeleteCard function */}
+            <CardList
+              getDeck={getDeck}
+              cards={deck.cards}
+              handleDeleteCard={handleDeleteCard}
+            />
           </div>
         </div>
       )}

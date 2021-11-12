@@ -6,15 +6,7 @@ const EditDeck = ({ deck, getDeck }) => {
   const { deckId } = useParams();
 
   useEffect(() => {
-    // fetch decks using utility function listDecks()
-    const controller = new AbortController();
-    const { signal } = controller;
-
-    getDeck(deckId, signal);
-
-    return () => {
-      controller.abort();
-    };
+    getDeck(deckId);
   }, [deckId]);
 
   return (

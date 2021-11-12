@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const NotEnoughCards = ({ totalCards }) => {
-  console.log("totalCards", totalCards);
+  // Displays NotEnoughCards component if totalCards is 0 or less than 3
   return (
     <div className="card">
       <div className="card-body">

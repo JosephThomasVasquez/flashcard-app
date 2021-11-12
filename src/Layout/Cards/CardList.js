@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useHistory, useRouteMatch } from "react-router-dom";
 
-const CardList = ({ cards, handleDeleteCard }) => {
+const CardList = ({ getDeck, cards, handleDeleteCard }) => {
   const { url } = useRouteMatch();
 
-  console.log(url);
+  useEffect(() => {}, []);
 
   const cardMap = cards.map((card) => (
     <div key={`cardId-${card.id}`} className="card">

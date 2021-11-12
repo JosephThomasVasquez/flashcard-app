@@ -18,6 +18,7 @@ const CreateDeck = ({ addDeck }) => {
         </nav>
       </div>
       <h2>Create Deck</h2>
+      {/* Renders DeckForm passing the create-deck prop for processing and the addDeck function */}
       <DeckForm processDeck={"create-deck"} addDeck={addDeck} />
     </div>
   );
