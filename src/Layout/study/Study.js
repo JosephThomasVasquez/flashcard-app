@@ -77,8 +77,8 @@ const Study = () => {
             </ol>
           </nav>
         </div>
-        (
-        <>
+
+        <div>
           <h2>Study: {deck.name}</h2>
           {deck.cards.length === 0 ? (
             notEnoughCards
@@ -92,7 +92,7 @@ const Study = () => {
               nextCard={nextCard}
             />
           )}
-        </>
+        </div>
       </div>
     )
   );
