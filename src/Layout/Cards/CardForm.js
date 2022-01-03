@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { updateCard, createCard } from "../../utils/api/index";
 
 const CardForm = ({ deck, cardData, processCard }) => {

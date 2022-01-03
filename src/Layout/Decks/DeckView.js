@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import { Link, useParams, useHistory, useRouteMatch } from "react-router-dom";
+import { Link, useParams, useRouteMatch } from "react-router-dom";
 import CardList from "../Cards/CardList";
 
 const DeckView = ({ deck, getDeck, handleDeleteDeck, handleDeleteCard }) => {
   const { deckId } = useParams();
   const { url } = useRouteMatch();
-  const history = useHistory();
 
   useEffect(() => {
     // fetch decks using utility function getDeck()

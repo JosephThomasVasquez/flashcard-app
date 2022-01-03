@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link, useHistory, useRouteMatch } from "react-router-dom";
+import React from "react";
+import { Link, useRouteMatch } from "react-router-dom";
 
 const CardList = ({ cards, handleDeleteCard }) => {
   const { url } = useRouteMatch();

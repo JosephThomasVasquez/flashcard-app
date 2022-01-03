@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { readDeck, readCard } from "../../utils/api/index";
+import { readCard } from "../../utils/api/index";
 import CardForm from "./CardForm";
 
 const EditCard = ({ deck, getDeck }) => {
