@@ -71,27 +71,9 @@
     },
     {
       "id": 15,
-<<<<<<< HEAD
-      "deckId": 4,
-      "front": "Why am I here?",
-      "back": "Because you are."
-    },
-    {
-      "id": 16,
-      "deckId": 4,
-      "front": "Did you think I would give you a real answer?",
-      "back": "Yeah, I thought about it, but decided not to."
-    },
-    {
-      "id": 17,
-      "deckId": 4,
-      "front": "Okay if you read this then will I finally tell you a correct answer?",
-      "back": "No!"
-=======
       "deckId": 3,
       "front": "xxzxcbnmzxcbnmzxbcnm",
       "back": "bcznmcbnzbxcnmzbxcmnzxczc\n"
->>>>>>> e0804b15067910aa93c31ef093792a4fda34f554
     }
   ]
 }
