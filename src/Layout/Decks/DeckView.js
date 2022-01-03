@@ -10,6 +10,10 @@ const DeckView = ({ deck, getDeck, handleDeleteDeck, handleDeleteCard }) => {
   useEffect(() => {
     // fetch decks using utility function getDeck()
     getDeck(deckId);
+
+    return () => {
+      // console.log("cleanup on dismount");
+    };
   }, [deckId]);
 
   return (

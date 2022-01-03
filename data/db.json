@@ -14,6 +14,16 @@
       "name": "Test Deck A",
       "description": "This is just a test for Deck A",
       "id": 3
+    },
+    {
+      "name": "Fake Deck",
+      "description": "Nothing to see here.",
+      "id": 4
+    },
+    {
+      "name": "asd",
+      "description": "asd",
+      "id": 5
     }
   ],
   "cards": [
@@ -64,6 +74,24 @@
       "deckId": 1,
       "front": "fghfghfgh",
       "back": "bruh"
+    },
+    {
+      "id": 15,
+      "deckId": 4,
+      "front": "Why am I here?",
+      "back": "Because you are."
+    },
+    {
+      "id": 16,
+      "deckId": 4,
+      "front": "Did you think I would give you a real answer?",
+      "back": "Yeah, I thought about it, but decided not to."
+    },
+    {
+      "id": 17,
+      "deckId": 4,
+      "front": "Okay if you read this then will I finally tell you a correct answer?",
+      "back": "No!"
     }
   ]
 }
