@@ -64,12 +64,6 @@
       "back": "gjghjghj ghj ghj ghj"
     },
     {
-      "id": 12,
-      "deckId": 3,
-      "front": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-      "back": "1231233423452342"
-    },
-    {
       "id": 14,
       "deckId": 1,
       "front": "fghfghfgh",
@@ -77,6 +71,7 @@
     },
     {
       "id": 15,
+<<<<<<< HEAD
       "deckId": 4,
       "front": "Why am I here?",
       "back": "Because you are."
@@ -92,6 +87,11 @@
       "deckId": 4,
       "front": "Okay if you read this then will I finally tell you a correct answer?",
       "back": "No!"
+=======
+      "deckId": 3,
+      "front": "xxzxcbnmzxcbnmzxbcnm",
+      "back": "bcznmcbnzbxcnmzbxcmnzxczc\n"
+>>>>>>> e0804b15067910aa93c31ef093792a4fda34f554
     }
   ]
 }
